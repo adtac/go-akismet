@@ -7,7 +7,7 @@ go-akismet is a Go client library for accessing the [Akismet API](https://akisme
 ### Usage
 
 ```go
-import "github.com/adtac/go-akismet"
+import "github.com/adtac/go-akismet/akismet"
 ```
 
 Here's an example if you want to check whether a particular comment is spam or not using the `akismet.Check` method:
