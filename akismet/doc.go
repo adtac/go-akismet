@@ -3,7 +3,7 @@ The akismet package provides a client for using the Akismet API.
 
 Usage:
 
-	import "github.com/adtac/go-akismet"
+	import "github.com/adtac/go-akismet/akismet"
 
 Here's an example if you want to check whether a particular comment is spam or
 not using the akismet.Check method:
