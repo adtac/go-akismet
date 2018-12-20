@@ -9,7 +9,7 @@ type Comment struct {
 	CommentType        string `form:"comment_type"`
 	CommentAuthor      string `form:"comment_author"`
 	CommentAuthorEmail string `form:"comment_author_email"`
-	CommentAuthorURL   string `form:"commento_author_url"`
+	CommentAuthorURL   string `form:"comment_author_url"`
 	CommentContent     string `form:"comment_content"`
 	// TODO: Add support for comment_date_gmt and comment_post_modified_gmt
 	BlogLang    string `form:"blog_lang"`
