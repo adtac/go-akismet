@@ -3,6 +3,7 @@ package akismet
 import (
 	"os"
 	"testing"
+	"time"
 )
 
 var chromeUA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36"
@@ -57,7 +58,7 @@ func testInvalids(t *testing.T, key string) {
 
 		testCaseCheck{
 			"Comment{} missing blog",
-			Comment{UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: "Hello!"},
+			Comment{Test: true, UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: "Hello!"},
 			true,
 			true,
 		},
@@ -70,21 +71,21 @@ func testSpam(t *testing.T, key string) {
 	testCases := []testCaseCheck{
 		testCaseCheck{
 			"Typical 419 scam",
-			Comment{Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: "Send $6,321 to my western union account and receive $1,000,000 today http://419.com http://419.com"},
+			Comment{Test: true, Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: "Send $6,321 to my western union account and receive $1,000,000 today http://419.com http://419.com"},
 			true,
 			false,
 		},
 
 		testCaseCheck{
 			"Outed by user agent",
-			Comment{Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: "Python-urllib/2.1", CommentContent: notSpam},
+			Comment{Test: true, Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: "Python-urllib/2.1", CommentContent: notSpam},
 			true,
 			false,
 		},
 
 		testCaseCheck{
 			"Known to be a spammer by email",
-			Comment{Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: notSpam, CommentAuthorEmail: "akismet-guaranteed-spam@example.com"},
+			Comment{Test: true, Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: notSpam, CommentAuthorEmail: "akismet-guaranteed-spam@example.com"},
 			true,
 			false,
 		},
@@ -97,7 +98,7 @@ func testHam(t *testing.T, key string) {
 	testCases := []testCaseCheck{
 		testCaseCheck{
 			"Comment{} missing blog",
-			Comment{Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: notSpam},
+			Comment{Test: true, Blog: "https://example.com", UserIP: "8.8.8.8", UserAgent: chromeUA, CommentContent: notSpam, CommentDate: time.Now()},
 			false,
 			false,
 		},
