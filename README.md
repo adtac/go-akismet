@@ -22,6 +22,7 @@ isSpam, err := akismet.Check(akismet.Comment{
 	CommentAuthor: "Billie Joe",
 	CommentAuthorEmail: "billie@example.com",
 	CommentContent: "Something's on my mind",
+	CommentDate: time.Now(),
 }, akismetKey)
 
 if err != nil {
